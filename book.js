@@ -41,7 +41,7 @@ function showLibrary() {
 		var card = document.querySelector("div[class='card template']").cloneNode(true);
 		card.classList.remove('template')
 
-		card.querySelector("img").src = "./../resources/book2.jpg";
+		card.querySelector("img").src = "./resources/book2.jpg";
 		card.querySelector(".bookTitle").textContent = myLibrary[i].title
 		card.querySelector(".bookAuthor").textContent = myLibrary[i].author
 		card.querySelector(".bookPages").textContent = myLibrary[i].pages
