@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Book</title>
+	<script type="text/javascript" src="book.js"></script>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<h3>Library</h3>
+
+	<button onclick="openForm()">Add New Book</button>
+	<div id="container"></div>
+
+	<div class="formPopup">
+		<form id="insertBookForm">
+			<h1>Insert New Book</h1>
+			<label for="bookTitle">Title</label>
+			<input type="text" placeholder="Book's Title" name="bookTitle"></input>
+			<p id="titleError"></p>
+			
+			<label for="bookAuthor">Author</label>
+			<input type="text" placeholder="Book's Author" name="bookAuthor"></input>
+			<p id="authorError"></p>
+
+			<label for="bookPages">Pages</label>
+			<input type="number" placeholder="Number of Pages" name="bookPages" min="1" max="9999"></input>
+			<p id="pagesError"></p>
+
+			<label for="haveRead">Have you read it?</label>
+			<input type="checkbox" name="haveRead">
+			<p id="readError"></p>
+
+			<p id="existError"></p>
+
+			<button type="button" class="insertButton" onclick="addBookToLibrary()">SUBMIT</button>
+			<br>
+			<button type="button" onclick="closeForm()">CANCEL</button>
+		</form>
+	</div>
+
+	<div class="card template">
+		<img src="./../resources/book.jpg" style="width: 200px">
+		<div class="cardInfo">
+			<h4 class="bookTitle"><b>Tower of God</b></h4>
+			<p class="bookAuthor">SIU</p>
+			<p class="bookPages">4</p>
+			<p class="bookStatus">Haven't read yet</p>
+			<button class="bookRemove">Remove from Library</button>
+		</div>
+	</div>
+
+
+</body>
+</html>
