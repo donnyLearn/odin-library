@@ -39,7 +39,7 @@
 	z-index: 1;
 	height: 100vh;
 	background: rgba(90, 90, 90, 0.5);
-	opacity: 0.8;
+	opacity: 1;
 }
 
 #insertBookForm {

@@ -5,17 +5,29 @@ function Book(title, author, pages, haveRead) {
 	this.author = author;
 	this.pages = pages;
 	this.haveRead = haveRead;
-	this.readStatus = haveRead ? "Alredy Read" : "Not read yet";
+	this.readStatus = haveRead ? "Read" : "Not Read";
 }
 Book.prototype.info = function() {
 	infoString = this.title + " by " + this.author + ", " + this.pages + " pages, " + this.	readStatus;
 	return infoString;
 }
 
+function toggleRead(e) {
+	var target = e.target.parentNode.querySelector('.bookStatus');
+	if(target.textContent == "Read") {
+		target.innerHTML = "Not Read";
+	} else {
+		target.innerHTML = "Read";
+	}
+}
+
 function removeBook(e) {
-	var targetTitle = e.target.parentNode.querySelector('.bookTitle').textContent;
-	console.log(targetTitle);
-	myLibrary = myLibrary.filter((book) => book.title != targetTitle);
+	var target = e.target.parentNode;
+	var targetTitle = target.querySelector('.bookTitle').textContent;
+	var targetAuthor = target.querySelector('.bookAuthor').textContent;
+	var targetPages = target.querySelector('.bookPages').textContent
+
+	myLibrary = myLibrary.filter((book) => (book.title != targetTitle || book.author != targetAuthor || book.pages != targetPages));
 	showLibrary();
 }
 
@@ -25,8 +37,6 @@ function showLibrary() {
 	while(container.firstChild) {
 		container.removeChild(container.firstChild);
 	}
-	console.log(myLibrary)
-
 	for (var i = 0; i < myLibrary.length; i++) {
 		var card = document.querySelector("div[class='card template']").cloneNode(true);
 		card.classList.remove('template')
@@ -36,6 +46,7 @@ function showLibrary() {
 		card.querySelector(".bookAuthor").textContent = myLibrary[i].author
 		card.querySelector(".bookPages").textContent = myLibrary[i].pages
 		card.querySelector(".bookStatus").textContent = myLibrary[i].readStatus
+		card.querySelector(".bookStatus").onclick = toggleRead;
 		card.querySelector(".bookRemove").onclick = removeBook;
 
 		container.appendChild(card)
@@ -49,6 +60,9 @@ function validateForm(formTitle, formAuthor, formPages) {
 	authorError.innerHTML = ""
 	var pagesError = document.getElementById("pagesError")
 	pagesError.innerHTML = ""
+	// var existError = document.getElementById("existError")
+	existError.innerHTML = ""
+
 	if(formTitle == "") {
 		titleError.innerHTML = "Please fill the title"
 		return false
@@ -104,7 +118,6 @@ function addBookToLibrary() {
 				existFlag = true;
 			}
 		}
-		existFlag = false;
 		if(!existFlag) {
 			myLibrary.push(book)
 			showLibrary();
@@ -112,10 +125,6 @@ function addBookToLibrary() {
 		}
 	}
 }
-
-
-// let theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, false)
-// console.log(theHobbit.info())
 
 function openForm() {
 	var form = document.getElementById("insertBookForm");
